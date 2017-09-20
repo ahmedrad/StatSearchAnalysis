@@ -23,41 +23,56 @@ Questions:
 
 ## Dependencies and Setting up:
 ### Pythnon 3.6 and iPython:
-Install through Anaconda at `https://www.anaconda.com/download/#download`
-pip should be available as a command line tool after successful installation
+* Install through Anaconda at `https://www.anaconda.com/download/#download`
+* pip should be available as a command line tool after successful installation
 
 ### Spark:
-Java requirement:
+* Java requirement:
 `Download and install it from oracle.com`
 
-Install Spark:
+* Install Spark:
 ```
 brew update
 brew install scala
 brew install apache-spark
 ```
 
-Running pyspark in the console should provide a command line interface to spark after a successful installation
+* Running pyspark in the console should provide a command line interface to spark after a successful installation
 
 ### Airflow
-installation:
+* installation:
 `pip install airflow`
-airflow commandline tool should be available after successful installation
-default directly for airflow will go in `~/airflow`
-may require installation of other dependencies like mysql or sqlite
+* airflow commandline tool should be available after successful installation
+* default directly for airflow will go in `~/airflow`
+* may require installation of other dependencies like mysql or sqlite
 
 ### StatSearchAnalysis:
-Clone repo into the airflow folder at `~/airflow`
-Copy the assignment.py DAG file into `~/airflow/dags` (create directory if not already there)
-cd into StatSearchAnalysis and run `pip install -r requirements.txt` to install application dependencies
+* Clone repo into the airflow folder at `~/airflow`
+* Copy the assignment.py DAG file into `~/airflow/dags` (create directory if not already there)
+* cd into StatSearchAnalysis and run `pip install -r requirements.txt` to install application dependencies
 
 ## Running Pipelines:
-Initializing airflow:
+* Initializing airflow:
 `airflow initdb`
-Running airflow webserver (nice to have):
+* Running airflow webserver (nice to have):
 `airflow webserver`
-Running pipelines:
+* Running pipelines:
 `airflow backfill assignment -s 2017-09-18` (the date can be changed to the day of execution)
-output can be found at:
+* output can be found at:
 `~/airflow/StatSearchAnalysis/out`
+* Progress and task tree views can be seen at the airflow webserver:
+`http://localhost:8080`
+* to clear and re-run:
+`airflow clear assignment`
+then run backfill commmand again
+* to reset airflowdb and start over:
+`airflow resetdb`
+`airflow initdb`
+
+## Potential improvements:
+* The folder structure of the repo entangled in airflow can definitely be improved
+* For every task spark is being initialized locally in the executor, this setup will have to change depending on that production spark setup is being used in StatSearch
+* This setup is using airflow's sequential executor which is not a production setup and doesn't allow for parallel execution of pipelines
+* The written output csvs are repartiioned into one partition which is inefficient, A potential better solution would be for the load step to load the parquet file directly into a DB for visualization and analysis
+* Some tests could be written with mock data to ensure logic is sound
 
