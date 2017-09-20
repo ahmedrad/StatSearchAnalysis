@@ -1,2 +1,3 @@
 out/*
 spark-warehouse
+__pycache__
