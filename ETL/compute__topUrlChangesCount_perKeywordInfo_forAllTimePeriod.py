@@ -1,9 +1,9 @@
 from initializer import *
 
-raw_data_file = get_out_dir() + '/crawler_report.csv.gz'
+raw_data_file = os.path.join(get_out_dir(), 'crawler_report.csv.gz')
 crawler_data_raw = sqlContext.read.csv(raw_data_file, header=True) \
                                   .withColumnRenamed('Crawl Date', 'CrawlDate')
-                                  
+
 top_ranked_urls = crawler_data_raw.filter(crawler_data_raw.Rank == 1)
 top_ranked_urls.registerTempTable('top_ranked_urls')
 
@@ -37,4 +37,5 @@ top_ranked_urls_changes_count = sqlContext.sql("""
         topUrlChangesCount DESC
 """)
 
-top_ranked_urls_changes_count.write.parquet(get_out_dir() + '/compute__topUrlChangesCount_perKeywordInfo_forAllTimePeriod.parquet', mode='overwrite')
+out_file = os.path.join(get_out_dir(), 'compute__topUrlChangesCount_perKeywordInfo_forAllTimePeriod.parquet')
+top_ranked_urls_changes_count.write.parquet(out_file, mode='overwrite')

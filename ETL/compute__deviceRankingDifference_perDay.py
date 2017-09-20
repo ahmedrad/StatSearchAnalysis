@@ -1,7 +1,7 @@
 from initializer import *
 from pyspark.sql.functions import abs, mean, col, stddev
 
-raw_data_file = get_out_dir() + '/crawler_report.csv.gz'
+raw_data_file = os.path.join(get_out_dir(), 'crawler_report.csv.gz')
 crawler_data_raw = sqlContext.read.csv(raw_data_file, header=True) \
                              .withColumnRenamed('Crawl Date', 'CrawlDate')
 
@@ -26,4 +26,6 @@ joined_data = joined_data.withColumn('rankDifference', abs(joined_data.desktopRa
 grouped_data = joined_data.groupBy('CrawlDate').agg(mean(col('rankDifference')), stddev(col('rankDifference')))
 grouped_data = grouped_data.withColumnRenamed('avg(rankDifference)', 'meanDeviceRankingDifference')
 grouped_data = grouped_data.withColumnRenamed('stddev_samp(rankDifference)', 'stddevDeviceRankingDifference')
-grouped_data.write.parquet(get_out_dir() + '/compute__deviceRankingDifference_perDay.parquet', mode='overwrite')
+
+out_file = os.path.join(get_out_dir(), 'compute__deviceRankingDifference_perDay.parquet')
+grouped_data.write.parquet(out_file, mode='overwrite')
