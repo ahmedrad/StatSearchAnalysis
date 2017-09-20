@@ -24,7 +24,7 @@ Questions:
 * Spark is utilized for computing and loading
 
 ## Dependencies and Setting up on MAC OS X:
-### Pythnon 3.6 and iPython:
+### Python 3.6 and iPython:
 * Install through Anaconda at `https://www.anaconda.com/download/#download`
 * pip should be available as a command line tool after successful installation
 
