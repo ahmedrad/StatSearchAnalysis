@@ -75,6 +75,6 @@ then run backfill commmand again
 * The folder structure of the repo entangled in airflow can definitely be improved
 * For every task spark is being initialized locally in the executor, this setup will have to change depending on that production spark setup is being used in StatSearch
 * This setup is using airflow's sequential executor which is not a production setup and doesn't allow for parallel execution of pipelines
-* The written output csvs are repartiioned into one partition which is inefficient, A potential better solution would be for the load step to load the parquet file directly into a DB for visualization and analysis
+* The written output csvs are repartitioned into one partition which is inefficient, A potential better solution would be for the load step to load the parquet file directly into a DB for visualization and analysis
 * Some tests could be written with mock data to ensure logic is sound
 
