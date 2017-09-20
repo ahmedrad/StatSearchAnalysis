@@ -21,7 +21,7 @@ Questions:
 * to answer the second question a csv file in `topUrlChangesCount_perKeywordInfo_forAllTimePeriod.csv` where the changes in the first ranked URL from one day to the next is calculated per keyword Info (normally the ceiling of this data should be 31 which means that the top ranked URL is changing every day but some keyword Info are showing up to 73 occurrences, the raw data from the crawler is showing that these keywords have multiple readings per day which their handling needs to be discussed as part of the assignment requirements)
 * to answer the third question a csv file in `out/deviceRankingDifference_perDay.csv` where the average absolute difference between desktop and smartphone ranking for a given keyword info is calculated per day. The standard deviation is calculated as well. This measure of difference is very simple but very intuitive as it immediately identifies how a user would observe the difference in ranks between devices. Other methods can be used as well for testing the statistical signifiance of the difference between rankings across devices but their need should be discussed further as they're not as straight forward
 
-## Dependencies and Setting up:
+## Dependencies and Setting up on MAC OS X:
 ### Pythnon 3.6 and iPython:
 * Install through Anaconda at `https://www.anaconda.com/download/#download`
 * pip should be available as a command line tool after successful installation
